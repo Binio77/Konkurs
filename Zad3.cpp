@@ -11,6 +11,7 @@ class anagram
     public:
         vector<int> X;
         vector<int> Y;
+
 };
 
 int rzad(int n, vector<vector<char>>& vec,  int numer_wyrazu, string x, int sumka_X, anagram *wsk)                          //szuka anagramów w wyrazach
@@ -36,7 +37,7 @@ int rzad(int n, vector<vector<char>>& vec,  int numer_wyrazu, string x, int sumk
                 cout << i << ' ';
                 znaleziono = true;
                 wsk->Y.push_back(numer_wyrazu);
-                wsk->X.push_back(i+j)
+                wsk->X.push_back(i);
             }
             else
             {
@@ -52,7 +53,7 @@ int rzad(int n, vector<vector<char>>& vec,  int numer_wyrazu, string x, int sumk
     return licznik;
 }
 
-int kolumna(int m, vector<vector<char>>& vec,  int numer_kolumny, string x, int sumka_X)
+int kolumna(int m, vector<vector<char>>& vec,  int numer_kolumny, string x, int sumka_X, anagram*wsk)
 {
     bool znaleziono = false;
     string wyraz;
@@ -75,6 +76,8 @@ int kolumna(int m, vector<vector<char>>& vec,  int numer_kolumny, string x, int 
             {
                 cout << i << ' ';
                 znaleziono = true;
+                wsk->X.push_back(numer_kolumny);
+                wsk->Y.push_back(i);
             }
             else
             {
@@ -173,8 +176,10 @@ int main()
     wej >> m >> n >> x;
 
     vector<vector<char>>vec;
-    anagram lok;
-    anagram*wsk = &lok;
+    anagram poziome;
+    anagram*wsk1 = &poziome;
+    anagram pionowe;
+    anagram*wsk2 = &pionowe;
     int sumka_X = 0;
     for(int i = 0; i < m; i++)
     {
@@ -199,24 +204,39 @@ int main()
     {
         sumka_X += (int)x[i];
     }
-    //a(n, vec, 1, x, sumka_X);
-    for(int i = 0; i < m; i++)
-        bledy += rzad(n, vec, i, x, sumka_X, wsk);
-    
-    cout << endl;
 
-    /*for(int i = 0; i < n; i++)
-        bledy += kolumna(m, vec, i, x, sumka_X);
-        
+    for(int i = 0; i < m; i++)
+        bledy += rzad(n, vec, i, x, sumka_X, wsk1);
+    
+    cout << endl<<endl;
+
+    for(int i = 0; i < n; i++)
+        bledy += kolumna(m, vec, i, x, sumka_X, wsk2);
+       
+    
+    cout << endl<<endl;
     
     if(m == n)
     {
         bledy += przekatnaLP(m, n, vec, x, sumka_X);
-        cout << endl;
+        cout << endl<<endl;
         bledy += przekatnaPL(m, n, vec, x, sumka_X);
-        cout << endl;
+        cout << endl<<endl;
     }
-    cout << bledy;*/
+    //cout << bledy;
+    if(x.size() % 2 != 0)
+    {
+        int licznik_T = 0;
+        for(int i = 0; i < poziome.X.size(); i++)
+        {
+            for(int j = 0; j < pionowe.X.size(); j++)
+            {
+                if(poziome.X[i] + x.size()/2 == pionowe.X[j] && poziome.Y[i]-1 == pionowe.Y[j])
+                    licznik_T++;
+            }
+        }
+        cout << licznik_T;
+    }
     getchar();
     getchar();
     return 0;
