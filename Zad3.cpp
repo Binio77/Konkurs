@@ -14,34 +14,35 @@ class anagram
 
 };
 
-int rzad(int n, vector<vector<char>>& vec,  int numer_wyrazu, string x, int sumka_X, anagram *wsk)                          //szuka anagramów w wyrazach
+
+int rzad(int n, vector<vector<char>>& tablica_znakow,  int numer_wyrazu, string wzor, int suma_znakow_Wzoru, anagram *wsk_poziome)                          //szuka anagramów w wyrazach
 {
-    int licznik = 0;
+    int bledy_alg_Andrzeja = 0;
     bool znaleziono = false;
-    for(int i = 0; i < n - (x.size()-1); i++)
+    for(int i = 0; i < n - (wzor.size()-1); i++)
     {
         string wyraz;
-        int sumka_W = 0;
-        for(int j = 0; j < x.size(); j++)
+        int suma_znakow_Wyrazu = 0;
+        for(int j = 0; j < wzor.size(); j++)
         {
-            sumka_W += vec[numer_wyrazu][i+j];
-            wyraz += vec[numer_wyrazu][i+j];
+            suma_znakow_Wyrazu += tablica_znakow[numer_wyrazu][i+j];
+            wyraz += tablica_znakow[numer_wyrazu][i+j];
         }
 
-        if(sumka_X == sumka_W)
+        if(suma_znakow_Wzoru == suma_znakow_Wyrazu)
         {
-            sort(x.begin(), x.end());
+            sort(wzor.begin(), wzor.end());
             sort(wyraz.begin(), wyraz.end());
-            if(wyraz == x)
+            if(wyraz == wzor)
             {
                 cout << i << ' ';
                 znaleziono = true;
-                wsk->Y.push_back(numer_wyrazu);
-                wsk->X.push_back(i);
+                wsk_poziome->Y.push_back(numer_wyrazu);
+                wsk_poziome->X.push_back(i);
             }
             else
             {
-                licznik++;
+                bledy_alg_Andrzeja++;
             }
 
         }
@@ -50,38 +51,38 @@ int rzad(int n, vector<vector<char>>& vec,  int numer_wyrazu, string x, int sumk
         cout << "-1";
 
     cout << endl;
-    return licznik;
+    return bledy_alg_Andrzeja;
 }
 
-int kolumna(int m, vector<vector<char>>& vec,  int numer_kolumny, string x, int sumka_X, anagram*wsk)
+int kolumna(int m, vector<vector<char>>& tablica_znakow,  int numer_kolumny, string wzor, int suma_znakow_Wzoru, anagram*wsk_pionowe)
 {
     bool znaleziono = false;
     string wyraz;
-    int licznik = 0;
-    for(int i = 0; i < m - (x.size()-1); i++)
+    int bledy_alg_Andrzeja = 0;
+    for(int i = 0; i < m - (wzor.size()-1); i++)
     {
         string wyraz;
-        int sumka_W = 0;
-        for(int j = 0; j < x.size(); j++)
+        int suma_znakow_Wyrazu = 0;
+        for(int j = 0; j < wzor.size(); j++)
         {
-            sumka_W += vec[i+j][numer_kolumny];
-            wyraz += vec[i+j][numer_kolumny];
+            suma_znakow_Wyrazu += tablica_znakow[i+j][numer_kolumny];
+            wyraz += tablica_znakow[i+j][numer_kolumny];
         }
 
-        if(sumka_X == sumka_W)
+        if(suma_znakow_Wzoru == suma_znakow_Wyrazu)
         {
-            sort(x.begin(), x.end());
+            sort(wzor.begin(), wzor.end());
             sort(wyraz.begin(), wyraz.end());
-            if(wyraz == x)
+            if(wyraz == wzor)
             {
                 cout << i << ' ';
                 znaleziono = true;
-                wsk->X.push_back(numer_kolumny);
-                wsk->Y.push_back(i);
+                wsk_pionowe->X.push_back(numer_kolumny);
+                wsk_pionowe->Y.push_back(i);
             }
             else
             {
-                licznik++;
+                bledy_alg_Andrzeja++;
             }
 
         }
@@ -90,33 +91,33 @@ int kolumna(int m, vector<vector<char>>& vec,  int numer_kolumny, string x, int 
         cout << "-1";
 
     cout << endl;
-    return licznik;
+    return bledy_alg_Andrzeja;
 }
-int przekatnaLP(int m, int n, vector<vector<char>>& vec, string x, int sumka_X)
+int przekatnaLP(int m, int n, vector<vector<char>>& tablica_znakow, string wzor, int suma_znakow_Wzoru)
 {
-    int licznik = 0;
+    int bledy_alg_Andrzeja = 0;
     bool znaleziono = false;
-    for(int i = 0; i < m - (x.size()-1); i++)
+    for(int i = 0; i < m - (wzor.size()-1); i++)
     {
         string wyraz;
-        int sumka_W = 0;
-        for(int j = 0; j < x.size(); j++)
+        int suma_znakow_Wyrazu = 0;
+        for(int j = 0; j < wzor.size(); j++)
         {
-            sumka_W += vec[i+j][i+j];
-            wyraz += vec[i+j][i+j];
+            suma_znakow_Wyrazu += tablica_znakow[i+j][i+j];
+            wyraz += tablica_znakow[i+j][i+j];
         }
-        if(sumka_X == sumka_W)
+        if(suma_znakow_Wzoru == suma_znakow_Wyrazu)
         {
-            sort(x.begin(), x.end());
+            sort(wzor.begin(), wzor.end());
             sort(wyraz.begin(), wyraz.end());
-            if(wyraz == x)
+            if(wyraz == wzor)
             {
                 cout << i << ' ';
                 znaleziono = true;
             }
             else
             {
-                licznik++;
+                bledy_alg_Andrzeja++;
             }
 
         }
@@ -125,33 +126,33 @@ int przekatnaLP(int m, int n, vector<vector<char>>& vec, string x, int sumka_X)
         cout << "-1";
 
     cout << endl;
-    return licznik;
+    return bledy_alg_Andrzeja;
 }
-int przekatnaPL(int m, int n, vector<vector<char>>& vec, string x, int sumka_X)
+int przekatnaPL(int m, int n, vector<vector<char>>& tablica_znakow, string wzor, int suma_znakow_Wzoru)
 {
-    int licznik = 0;
+    int bledy_alg_Andrzeja = 0;
     bool znaleziono = false;
-    for(int i = 0; i < m - (x.size()-1); i++)
+    for(int i = 0; i < m - (wzor.size()-1); i++)
     {
         string wyraz;
-        int sumka_W = 0;
-        for(int j = 0; j < x.size(); j++)
+        int suma_znakow_Wyrazu = 0;
+        for(int j = 0; j < wzor.size(); j++)
         {
-            sumka_W += vec[i+j][n-j-1-i];
-            wyraz += vec[i+j][n-j-1-i];
+            suma_znakow_Wyrazu += tablica_znakow[i+j][n-j-1-i];
+            wyraz += tablica_znakow[i+j][n-j-1-i];
         }
-        if(sumka_X == sumka_W)
+        if(suma_znakow_Wzoru == suma_znakow_Wyrazu)
         {
-            sort(x.begin(), x.end());
+            sort(wzor.begin(), wzor.end());
             sort(wyraz.begin(), wyraz.end());
-            if(wyraz == x)
+            if(wyraz == wzor)
             {
                 cout << i << ' ';
                 znaleziono = true;
             }
             else
             {
-                licznik++;
+                bledy_alg_Andrzeja++;
             }
 
         }
@@ -160,27 +161,31 @@ int przekatnaPL(int m, int n, vector<vector<char>>& vec, string x, int sumka_X)
         cout << "-1";
 
     cout << endl;
-    return licznik;
+    return bledy_alg_Andrzeja;
 }
 
+int srodek_anagramu_poziomego(int poczatek_anagramu, int dlugosc_wzoru)
+{
+    return poczatek_anagramu + dlugosc_wzoru/2;
+}
 
 int main()
 {
     ifstream wej("tekst.txt");
     int m, n;
-    string x;
-    int bledy = 0;                               
+    string wzor;
+    int suma_bledy_alg_Andrzeja = 0;                               
                                                 //slowo wzorcowe      
                                                 //m to liczba tekstow
                                                 //n liczba znaków
-    wej >> m >> n >> x;
+    wej >> m >> n >> wzor;
 
-    vector<vector<char>>vec;
-    anagram poziome;
-    anagram*wsk1 = &poziome;
-    anagram pionowe;
-    anagram*wsk2 = &pionowe;
-    int sumka_X = 0;
+    vector<vector<char>>tablica_znakow;
+    anagram anagramy_poziome;
+    anagram*wsk_poziome = &anagramy_poziome;
+    anagram anagramy_pionowe;
+    anagram*wsk_pionowe = &anagramy_pionowe;
+    int suma_znakow_Wzoru = 0;
     for(int i = 0; i < m; i++)
     {
         string wyraz;
@@ -190,53 +195,55 @@ int main()
         {
             v.push_back(wyraz[j]);
         }
-        vec.push_back(v);
+        tablica_znakow.push_back(v);
     }
     for(int i = 0; i < m ;i++)
     {
         for(int j = 0; j < n; j++)
         {
-            cout << vec[i][j]<<' ';
+            cout << tablica_znakow[i][j]<<' ';
         }
         cout << endl;
     }
-    for(int i = x.size()-1; i >= 0; i--)
+    for(int i = wzor.size()-1; i >= 0; i--)
     {
-        sumka_X += (int)x[i];
+        suma_znakow_Wzoru += (int)wzor[i];
     }
 
     for(int i = 0; i < m; i++)
-        bledy += rzad(n, vec, i, x, sumka_X, wsk1);
+        suma_bledy_alg_Andrzeja += rzad(n, tablica_znakow, i, wzor, suma_znakow_Wzoru, wsk_poziome);
     
     cout << endl<<endl;
 
     for(int i = 0; i < n; i++)
-        bledy += kolumna(m, vec, i, x, sumka_X, wsk2);
+        suma_bledy_alg_Andrzeja += kolumna(m, tablica_znakow, i, wzor, suma_znakow_Wzoru, wsk_pionowe);
        
     
     cout << endl<<endl;
     
     if(m == n)
     {
-        bledy += przekatnaLP(m, n, vec, x, sumka_X);
+        suma_bledy_alg_Andrzeja += przekatnaLP(m, n, tablica_znakow, wzor, suma_znakow_Wzoru);
         cout << endl<<endl;
-        bledy += przekatnaPL(m, n, vec, x, sumka_X);
+        suma_bledy_alg_Andrzeja += przekatnaPL(m, n, tablica_znakow, wzor, suma_znakow_Wzoru);
         cout << endl<<endl;
     }
-    //cout << bledy;
-    if(x.size() % 2 != 0)
+
+    if(wzor.size() % 2 != 0)
     {
-        int licznik_T = 0;
-        for(int i = 0; i < poziome.X.size(); i++)
+        int licznik_liter_T = 0;
+        for(int iteracja_pozioma = 0; iteracja_pozioma < anagramy_poziome.X.size(); iteracja_pozioma++)
         {
-            for(int j = 0; j < pionowe.X.size(); j++)
+            for(int interacja_pionowa = 0; interacja_pionowa < anagramy_pionowe.X.size(); interacja_pionowa++)
             {
-                if(poziome.X[i] + x.size()/2 == pionowe.X[j] && poziome.Y[i]-1 == pionowe.Y[j])
-                    licznik_T++;
+                if(srodek_anagramu_poziomego(anagramy_poziome.X[iteracja_pozioma], wzor.size()) == anagramy_pionowe.X[interacja_pionowa] && 
+                    anagramy_poziome.Y[iteracja_pozioma]-1 == anagramy_pionowe.Y[interacja_pionowa])
+                    licznik_liter_T++;
             }
         }
-        cout << licznik_T;
+        cout << licznik_liter_T << endl;
     }
+    cout << suma_bledy_alg_Andrzeja;
     getchar();
     getchar();
     return 0;
