@@ -1,6 +1,8 @@
-4 6
+6 6
 alo
 kalosz
 aloalo
 alacja
-pelbng
+pelong
+alecja
+akacja

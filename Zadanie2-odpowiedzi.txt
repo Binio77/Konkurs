@@ -1,0 +1,12 @@
+II 
+13
+IV
+MaksimumOfLiczba_punktów	okręg	identyfikator ucznia
+442	I	21
+459	II	15
+372	III	61
+500	IV	3
+359	V	81
+500	VI	1
+200	VII	86
+491	VIII	5
